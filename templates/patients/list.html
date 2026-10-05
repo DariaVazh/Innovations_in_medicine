@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %}Пациенты — AI-MRI{% endblock %}
+
+{% block content %}
+<header class="page-header">
+  <h1 class="page-title">Пациенты</h1>
+  <p class="page-subtitle">Выберите пациента для просмотра исследований и результатов анализа.</p>
+</header>
+
+<div class="search">
+  <span class="icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg></span>
+  <input class="input" type="search" placeholder="Поиск по фамилии, паспорту пациента">
+</div>
+
+<nav class="alpha-filter">
+  <span class="alpha-filter__item alpha-filter__item--active">Все</span>
+  <span class="alpha-filter__item">А</span>
+  <span class="alpha-filter__item">Б</span>
+  <span class="alpha-filter__item">В</span>
+  <span class="alpha-filter__item">Г</span>
+  <span class="alpha-filter__item">Д</span>
+  <span class="alpha-filter__item">Е</span>
+  <span class="alpha-filter__item">Ж</span>
+  <span class="alpha-filter__item">З</span>
+  <span class="alpha-filter__item">И</span>
+  <span class="alpha-filter__item">К</span>
+  <span class="alpha-filter__item">Л</span>
+  <span class="alpha-filter__item">М</span>
+  <span class="alpha-filter__item">Н</span>
+  <span class="alpha-filter__item">О</span>
+  <span class="alpha-filter__item">П</span>
+  <span class="alpha-filter__item">Р</span>
+  <span class="alpha-filter__item">С</span>
+  <span class="alpha-filter__item">Т</span>
+  <span class="alpha-filter__item">У</span>
+  <span class="alpha-filter__item">Ф</span>
+  <span class="alpha-filter__item">Х</span>
+  <span class="alpha-filter__item">Ц</span>
+  <span class="alpha-filter__item">Ч</span>
+  <span class="alpha-filter__item">Ш</span>
+  <span class="alpha-filter__item">Щ</span>
+  <span class="alpha-filter__item">Э</span>
+  <span class="alpha-filter__item">Ю</span>
+  <span class="alpha-filter__item">Я</span>
+</nav>
+
+<h2 style="font-size:15px;font-weight:600;margin-bottom:14px;">Все пациенты</h2>
+
+<section class="patient-list">
+  {% for p in patients %}
+    <a href="/patients/{{ p.id }}/" class="patient-row">
+      <div class="patient-row__avatar">
+        <span class="icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+      </div>
+      <div class="patient-row__info">
+        <div class="patient-row__name">{{ p.name }}</div>
+      </div>
+      {% if p.status == 'success' %}
+        <span class="badge badge--success">Завершён</span>
+      {% elif p.status == 'warning' %}
+        <span class="badge badge--warning">Внимание</span>
+      {% else %}
+        <span class="badge badge--neutral">Нет данных</span>
+      {% endif %}
+      <span class="icon patient-row__arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+    </a>
+  {% endfor %}
+</section>
+{% endblock %}
